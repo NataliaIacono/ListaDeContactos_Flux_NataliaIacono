@@ -5,7 +5,6 @@ import injectContext from './store/appContext';
 
 import Agenda from './views/agenda.js';
 import Formulario from './views/formulario.js';
-import FormularioEditable from './views/formularioEditable.js';
 
 //create your first component
 const Layout = () => {
