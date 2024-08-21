@@ -113,12 +113,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 
                     const contactosModificados = store.contactos.map((item) => {
                         if (item.id === id) {
-                            return data;
+                            // return { ...item.data };
+                            return { data };
                         }
                         return item;
                     });
 
-                    setStore({ contactos: contactosModificados }); //modifique el estado de contactos
+                    setStore({ contactos: contactosModificados });
+                    //setStore({ contactos: [...contactosModificados] }); //modifique el estado de contactos
 
                     console.log(store);
                 } catch (error) {

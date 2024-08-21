@@ -14,6 +14,8 @@ const Formulario = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (parametros.id) {
+            console.log(parametros.id);
+
             actions.editarContacto(name, email, phone, adress, parametros.id);
         } else {
             actions.agregarContactoaLaApi(name, email, phone, adress);

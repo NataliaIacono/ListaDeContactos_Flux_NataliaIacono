@@ -18,6 +18,8 @@ const Agenda = () => {
                     </span>
                 </Link>
             </div>
+            <h1>Mi lista de contactos</h1>
+            <h6>Para inicializar esta agenda, debes ir al botón ¨Agregar nuevo contacto¨</h6>
 
             {store.contactos?.map(
                 (
