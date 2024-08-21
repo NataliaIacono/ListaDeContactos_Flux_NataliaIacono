@@ -1,8 +1,10 @@
-import React from 'react';
-//import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Context } from '../store/appContext';
+import { Link } from 'react-router-dom';
 import '../../styles/card.css';
 
-const Card = ({ name, adress, phone, email }) => {
+const Card = ({ name, adress, phone, email, id }) => {
+    const { store, actions } = useContext(Context);
     return (
         <div className="container d-flex mb-1">
             <div>
@@ -22,9 +24,18 @@ const Card = ({ name, adress, phone, email }) => {
                 </p>
             </div>
             <div className="botones ms-2 md-2  ms-auto">
-                <i className="fa-solid fa-pencil me-3"></i>
+                <Link to={`/formulario/${id}`}>
+                    <i className="fa-solid fa-pencil me-3"></i>
+                </Link>
 
-                <i className="fa-solid fa-trash"></i>
+                <Link>
+                    {' '}
+                    <i
+                        className="fa-solid fa-trash"
+                        onClick={() => {
+                            actions.borrarContacto(id);
+                        }}></i>
+                </Link>
             </div>
         </div>
     );

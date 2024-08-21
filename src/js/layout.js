@@ -19,7 +19,7 @@ const Layout = () => {
                 <Routes>
                     <Route path="/" element={<Agenda />} />
                     <Route path="/formulario" element={<Formulario />} />
-                    <Route path="/formularioEditable" element={<FormularioEditable />} />
+                    <Route path="/formulario/:id" element={<Formulario />} />
 
                     <Route path="*" element={<h1>Not found!</h1>} />
                 </Routes>

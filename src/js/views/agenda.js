@@ -23,7 +23,7 @@ const Agenda = () => {
                 (
                     contacto, // ? si encuentra que el array esta vacio no hace el map
                 ) => (
-                    <Card key={contacto.id} name={contacto.name} email={contacto.email} phone={contacto.phone} adress={contacto.address} />
+                    <Card key={contacto.id} name={contacto.name} email={contacto.email} phone={contacto.phone} adress={contacto.address} id={contacto.id} />
                 ),
             )}
         </div>

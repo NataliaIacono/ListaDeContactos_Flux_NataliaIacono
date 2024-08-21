@@ -1,6 +1,6 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Context } from '../store/appContext';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import '../../styles/formulario.css';
 
 const FormularioEditable = () => {
@@ -9,11 +9,17 @@ const FormularioEditable = () => {
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [adress, setAdress] = useState('');
+    const id = useParams(id);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        actions.agregarContactoaLaApi(name, email, phone, adress);
+        //actions.agregarContactoaLaApi(name, email, phone, adress);
+        // la funcion que cree de editarContacto
     };
+
+    useEffect(() => {
+        console.log(id);
+    }, []);
 
     return (
         <div className="container ">
