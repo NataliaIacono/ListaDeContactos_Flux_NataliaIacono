@@ -3,7 +3,7 @@ import { Context } from '../store/appContext';
 import { Link } from 'react-router-dom';
 import '../../styles/card.css';
 
-const Card = ({ name, adress, phone, email, id }) => {
+const Card = ({ name, address, phone, email, id }) => {
     const { store, actions } = useContext(Context);
     return (
         <div className="container d-flex mb-1">
@@ -13,7 +13,7 @@ const Card = ({ name, adress, phone, email, id }) => {
             <div className="datos ms-8 md-8">
                 <h3 className="nombre mb-4">{name}</h3>
                 <p>
-                    <i className="fa-solid fa-location-dot"></i> {adress}
+                    <i className="fa-solid fa-location-dot"></i> {address}
                 </p>
                 <p>
                     <i className="fa-solid fa-phone"></i>
@@ -24,7 +24,11 @@ const Card = ({ name, adress, phone, email, id }) => {
                 </p>
             </div>
             <div className="botones ms-2 md-2  ms-auto">
-                <Link to={`/formulario/${id}`}>
+                <Link
+                    onClick={() => {
+                        actions.contactoAEditar(name, email, phone, address, id);
+                    }}
+                    to={`/formulario/${id}`}>
                     <i className="fa-solid fa-pencil me-3"></i>
                 </Link>
 

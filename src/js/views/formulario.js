@@ -1,29 +1,31 @@
 import React, { useContext, useState } from 'react';
 import { Context } from '../store/appContext';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import '../../styles/formulario.css';
 
 const Formulario = () => {
-    const parametros = useParams(); // para obtener el los paramertros de la url
+    const parametros = useParams(); // para obtener el los parametros de la url
     const { store, actions } = useContext(Context);
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');
-    const [adress, setAdress] = useState('');
+    const [name, setName] = useState(parametros.id ? store.contacto.name : '');
+    const [email, setEmail] = useState(parametros.id ? store.contacto.email : '');
+    const [phone, setPhone] = useState(parametros.id ? store.contacto.phone : '');
+    const [address, setAddress] = useState(parametros.id ? store.contacto.address : '');
+    console.log(store.contacto);
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
         if (parametros.id) {
             console.log(parametros.id);
 
-            actions.editarContacto(name, email, phone, adress, parametros.id);
+            actions.editarContacto(name, email, phone, address, parametros.id, navigate);
         } else {
-            actions.agregarContactoaLaApi(name, email, phone, adress);
+            actions.agregarContactoaLaApi(name, email, phone, address, navigate);
         }
         setName('');
         setEmail('');
         setPhone('');
-        setAdress('');
+        setAddress('');
     };
 
     console.log(parametros);
@@ -57,7 +59,7 @@ const Formulario = () => {
                         <label htmlFor="direccion" className="form-label">
                             Direccion
                         </label>
-                        <input onChange={(e) => setAdress(e.target.value)} type="text" className="form-control" id="direccion" value={adress} />
+                        <input onChange={(e) => setAddress(e.target.value)} type="text" className="form-control" id="direccion" value={address} />
                     </div>
                     <button type="submit" className="btn btn-primary mb-2">
                         Guardar

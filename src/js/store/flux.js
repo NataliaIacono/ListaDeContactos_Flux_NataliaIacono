@@ -4,8 +4,8 @@ const getState = ({ getStore, getActions, setStore }) => {
     return {
         store: {
             contactos: [], // aqui se almacenaran todos los contactos que vengan de la api
-            nombre: 'Natalia',
-            // contacto: {},
+
+            contacto: {},
         },
         actions: {
             traerContactosDeLaApi: async () => {
@@ -36,22 +36,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
             },
 
-            /* traerContactosDeLaApi: async () => {
-                try {
-                    const response = await contactDispatcher.get();
-
-                    if (response.ok) {
-                        const data = await response.json();
-                        setStore({ contactList: data.contactList });
-                    }
-
-                    console.log(contactList);
-                } catch (error) {
-                    console.log('error al traer la lista de contactos');
-                }
-            },*/
-
-            agregarContactoaLaApi: async (name, email, phone, address) => {
+            agregarContactoaLaApi: async (name, email, phone, address, navigate) => {
                 try {
                     const response = await fetch('https://playground.4geeks.com/contact/agendas/Natalia/contacts', {
                         method: 'POST',
@@ -80,12 +65,13 @@ const getState = ({ getStore, getActions, setStore }) => {
                     setStore({ contactos: [...store.contactos, data] }); //modifique el estado de contactos
                     //setStore({ ...store, nombre: 'javier' }); es un ejemplo
                     console.log(store);
+                    navigate('/');
                 } catch (error) {
                     console.log(error);
                 }
             },
 
-            editarContacto: async (name, email, phone, address, id) => {
+            editarContacto: async (name, email, phone, address, id, navigate) => {
                 try {
                     const response = await fetch(`https://playground.4geeks.com/contact/agendas/Natalia/contacts/${id}`, {
                         method: 'PUT',
@@ -108,21 +94,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 
                     const data = await response.json();
                     console.log(data);
-                    const store = getStore(); // obtengo el estado, todos los estados
-                    console.log(store);
-
-                    const contactosModificados = store.contactos.map((item) => {
-                        if (item.id === id) {
-                            // return { ...item.data };
-                            return { data };
-                        }
-                        return item;
-                    });
-
-                    setStore({ contactos: contactosModificados });
-                    //setStore({ contactos: [...contactosModificados] }); //modifique el estado de contactos
-
-                    console.log(store);
+                    if (data) {
+                        getActions().traerContactosDeLaApi();
+                        navigate('/');
+                    }
                 } catch (error) {
                     console.log(error);
                 }
@@ -164,6 +139,20 @@ const getState = ({ getStore, getActions, setStore }) => {
                 } catch (error) {
                     console.log(error);
                 }
+            },
+
+            contactoAEditar: (name, email, phone, address, id) => {
+                console.log(name, email, phone, address, id);
+
+                setStore({
+                    contacto: {
+                        name: name,
+                        email: email,
+                        phone: phone,
+                        address: address,
+                        id: id,
+                    },
+                });
             },
         },
     };
